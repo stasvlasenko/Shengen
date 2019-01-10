@@ -1,3 +1,4 @@
+import json
 countries =[
     {'name': 'Thailand', 'sea': True, 'shengen': True,'echange': 2.2},
     {'name': 'Hungray', 'sea': False, 'shengen': True,'echange': 4.3},
@@ -5,12 +6,12 @@ countries =[
     ]
 
 countries_dict={
-    'Italy':    {'sea': True,
+    'Italy' : {'sea': True,
                 'hot': 23,
                 'shengen': True,
                 'amount': 2.2,
                 'cost': 10000},
-    'Hungray':  {'sea': True,
+    'Hungray' : {'sea': True,
                 'hot': 20,
                 'shengen': True,
                 'amount': 4.3,
@@ -46,6 +47,9 @@ countries_dict={
                  'amount': 5,
                  'cost': 5000}
 }
+
+with open("list_country.json", "w") as list:
+    json.dump(countries_dict, list)
 
 my_money = 50000
 
