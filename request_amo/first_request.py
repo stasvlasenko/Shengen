@@ -25,10 +25,28 @@ def users(domain, cookies):
     r = requests.get(url, params=params, cookies=cookies)
     return r
 
+def list_funnel(domain, cookie):
+    method = 'api/v2/pipelines'
+    url = 'https://%s.amocrm.ru/%s' % (domain, method)
+    #id = {'id': id_voronki}
+    r = requests.get(url, cookies=cookies)
+    return r
+
+def list_leads(domain, cookie):
+    method = 'api/v2/leads'
+    url = 'https://%s.amocrm.ru/%s' % (domain, method)
+    id = {'id': 123123}
+    r = requests.get(url, params=id, cookies=cookies)
+    return r
+
 #Авторизуемся и сохраняем куки для дальнейших вызовов
 cookies = autorized(domain).cookies
 
-dict_users = users(domain, cookies).json()
-pprint(dict_users)
+#dict_users = users(domain, cookies).json()
 
+dict_funnel = list_funnel(domain, cookies).json()
+dict_leads = list_leads(domain, cookies).json()
 
+print('Данные о воронках:')
+for i in dict_funnel['_embedded']['items']:
+    print(dict_funnel['_embedded']['items'][i])
