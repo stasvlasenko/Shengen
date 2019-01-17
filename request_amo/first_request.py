@@ -4,10 +4,13 @@ from pprint import pprint
 
 domain = 'izan'
 
-def autorized(domain):
+with open('setting.json') as login:
+    setting = json.load(login)
+
+def autorized(domain, setting):
     dict = {
-        'USER_LOGIN': 'eadorf@gmail.com',
-        'USER_HASH': '2f9665f414a2a89df40f49be4bf17ea1fa5db0da'
+        'USER_LOGIN': setting['login'],
+        'USER_HASH': setting['hash']
     }
 
     method = 'private/api/auth.php'
@@ -40,7 +43,7 @@ def list_leads(domain, cookie):
     return r
 
 #Авторизуемся и сохраняем куки для дальнейших вызовов
-cookies = autorized(domain).cookies
+cookies = autorized(domain, setting).cookies
 
 #dict_users = users(domain, cookies).json()
 
